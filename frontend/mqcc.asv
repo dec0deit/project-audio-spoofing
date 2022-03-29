@@ -3,17 +3,17 @@ ap= 'C:\Users\singl\Downloads\Audio-Classification\Replay-Recordings\training\0P
 audio_files=dir(fullfile(ap,'*.wav'));
 nfiles=length(audio_files);
 disp(nfiles);
-for i=1:2         
+for i=1:1008    
   filename=audio_files(i).name;
   filename1=strcat('C:\Users\singl\Downloads\Audio-Classification\Replay-Recordings\training\0PR\',filename);
   [x,fs]=audioread(filename1);
-  [coeffs,delta,deltaDelta,loc]=gtcc(x,fs);
+  [coeffs,delta,deltaDelta,loc]=mfcc(x,fs);
   disp(coeffs+" "+deltaDelta)
   F= horzcat(coeffs,delta,deltaDelta);
   M2 = mean(F);
-  M1= 0;
+  M1= 10;
   M= horzcat(M2,M1);
-  dlmwrite('G_0PR.csv',M,'delimiter',',','-append');
+  dlmwrite('M_TRAIN.csv',M,'delimiter',',','-append');
   i = i+1;
 end
 disp("all done")
