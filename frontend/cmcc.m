@@ -15,7 +15,8 @@ for i=1:nfiles
       M1= 0;
       M= horzcat(M2,M1);
       dlmwrite('C_TRAIN.csv',M,'delimiter',',','-append');
-  catch
+  catch ME
+      disp(ME)
       disp("some error occured in some file")
   end
   i=i+1
